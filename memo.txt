@@ -1,0 +1,16 @@
+https://hooks.slack.com/services/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
+
+payload={"text": "This is a line of text in a channel.\nAnd this is another line of text."}
+
+1pGKOZsAJ0QXjTTH1BdVGaWI
+
+token=1pGKOZsAJ0QXjTTH1BdVGaWI
+team_id=T0001
+team_domain=example
+channel_id=C2147483705
+channel_name=test
+user_id=U2147483697
+user_name=Steve
+command=/weather
+text=94070
+response_url=https://hooks.slack.com/commands/1234/5678
