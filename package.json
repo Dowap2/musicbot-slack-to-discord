@@ -18,8 +18,13 @@
   },
   "homepage": "https://github.com/Dowap2/css-generator#readme",
   "dependencies": {
+    "@discordjs/opus": "^0.3.3",
     "@slack/events-api": "^2.3.4",
+    "@slack/web-api": "^5.14.0",
+    "discord.js": "^12.5.1",
     "express": "^4.17.1",
+    "ffmpeg-static": "^4.2.7",
+    "opusscript": "0.0.7",
     "slack-node": "^0.1.8"
   },
   "devDependencies": {

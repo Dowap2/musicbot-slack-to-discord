@@ -1,23 +1,52 @@
 import express from "express";
+import { WebClient } from "@slack/web-api";
 import { createEventAdapter } from "@slack/events-api";
 import { createServer } from "http";
+import Discord, { Message } from "discord.js";
+import token from "../config/discordToken.json";
 
-// 생성한 슬랙봇에 대한 키값들
+const client = new Discord.Client();
+
+function playMusic(url) {
+  client.once("message", msg => {
+    msg.member.voice.channel.join().then(connection => {
+      msg.reply("playing music!");
+      connection.play(url);
+    });
+
+    msg.channel.send("!play" + url);
+  });
+  client.login(token.token);
+}
+
+// 생성한 슬랙앱에 대한 키값들
 import CONFIG from "../config/bot.json";
-/* 
+import { connection } from "mongoose";
+/*
   {
-    "SIGNING_SECRET": "XXXX"
+    "SIGNING_SECRET": "XXXX",
+    "BOT_USER_OAUTH_ACCESS_TOKEN": "xoxb-XXXX"
   }
  */
 
-// 슬랙에서 슬랙봇에게 접근가능한 엔드포인트를 만들기 위해 웹서버(express)를 사용
+// 슬랙에서 슬랙앱에게 접근가능한 엔드포인트를 만들기 위해 웹서버(express)를 사용
 const app = express();
 
 const slackEvents = createEventAdapter(CONFIG.SIGNING_SECRET);
+const webClient = new WebClient(CONFIG.BOT_USER_OAUTH_ACCESS_TOKEN);
 
 // 메시지 이벤트 구독하기
 slackEvents.on("message", async event => {
   console.log(event);
+  const command = String(event.text).slice(0, 5);
+  const url = String(event.text).slice(5);
+  if (command == "!play") {
+    webClient.chat.postMessage({
+      text: url,
+      channel: event.channel
+    });
+    playMusic(url);
+  }
 });
 
 // 메지지 이벤트 엔드포인트를 express 에 등록하기

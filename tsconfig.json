@@ -1,10 +1,7 @@
 {
-  "SIGNING_SECRET": "XXXX"
-  {
-    "compilerOptions": {
-      "resolveJsonModule": true,
-      "esModuleInterop": true
-    },
-    "include": ["src/*"]
-  }
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  },
+  "include": ["src/*"]
 }
