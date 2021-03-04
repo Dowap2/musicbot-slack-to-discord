@@ -24,7 +24,7 @@ const slackEvents = createEventAdapter(CONFIG.SIGNING_SECRET);
 const webClient = new WebClient(CONFIG.BOT_USER_OAUTH_ACCESS_TOKEN);
 
 slackEvents.on("message", async event => {
-  console.log(event);
+  console.log(event.text);
   const command = String(event.text).slice(0, 5);
   const url = String(event.text).slice(5);
   if (command == "!play") {
@@ -38,6 +38,6 @@ slackEvents.on("message", async event => {
 
 app.use("/slack/events", slackEvents.requestListener());
 
-createServer(app).listen(3000, () => {
+createServer(app).listen(6000, () => {
   console.log("run slack bot");
 });
