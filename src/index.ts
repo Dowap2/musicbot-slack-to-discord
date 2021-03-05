@@ -12,10 +12,11 @@ function playMusic(url) {
   client.once("message", msg => {
     msg.member.voice.channel.join().then(connection => {
       msg.reply("playing music!");
-      const dispatcher = connection.play("./내손을잡아.mp3");
+      const dispatcher = connection.play("../mp3/내손을잡아");
+      console.log("play start");
       dispatcher.on("end", end => {});
     });
-    msg.channel.send("!play" + url);
+    msg.channel.send(url);
   });
   client.login(token.token);
 }
