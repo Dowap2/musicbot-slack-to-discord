@@ -12,7 +12,8 @@ function playMusic(url) {
   client.once("message", msg => {
     msg.member.voice.channel.join().then(connection => {
       msg.reply("playing music!");
-      connection.play(url);
+      const dispatcher = connection.play("./내손을잡아.mp3");
+      dispatcher.on("end", end => {});
     });
     msg.channel.send("!play" + url);
   });
